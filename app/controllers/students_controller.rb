@@ -1,0 +1,2 @@
+class StudentsController < UsersController
+end

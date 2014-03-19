@@ -1,0 +1,26 @@
+<h1>Welcome to GA</h1>
+<ul id='campuses'>
+<% @campuses.each do |campus| %>
+  <li><%= campus.location %>
+  <img src='<%= campus.campus_pic_file_name %>' alt='campus image'/>
+    <ul class='cohort'>
+      <% campus.cohorts.each do |cohort| %>
+        <li>
+          <%= cohort.month %>, <%= cohort.year %>
+          <% if current_user && current_user.is_admin? %>
+            <%= link_to "Edit", edit_cohort_path(cohort) %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </li>  
+<% end %>
+</ul>
+
+<footer><div class="user_panel">
+  <% if !current_user %>
+    <p><%= link_to "Login, Old Friend...", "/login" %></p>
+  <% else %>
+    <p><%= link_to "Logout", "/session", method: "delete" %></p>
+  <% end %>
+</div></footer>
